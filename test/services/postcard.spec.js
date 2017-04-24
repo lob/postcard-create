@@ -27,9 +27,9 @@ describe('postcard service', function () {
     it('calls the correct endpoint and with correct params', function () {
       var payload = { id: 'psc_id' };
 
-      Postcard.create(payload);
-
       Sinon.stub(API, 'post').returns($q.resolve());
+
+      Postcard.create(payload);      
 
       $rootScope.$apply();
 
