@@ -29,7 +29,7 @@ describe('postcard service', function () {
 
       Sinon.stub(API, 'post').returns($q.resolve());
 
-      Postcard.create(payload);      
+      Postcard.create(payload);
 
       $rootScope.$apply();
 
