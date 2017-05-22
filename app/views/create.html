@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Postcard Create</h1>
+    <hr>
+  </div>
+</div>
+
+<div class="row postcard-create">
+  <div class="col-xs-12 col-sm-5">
+
+    <div ng-class="{ 'in alert': error }" class="fade alert-danger">
+      {{error}}
+    </div>
+    <form ng-submit="create(payload)">
+      <div class="form-group">
+        <label class="dashboard-control-label" for="description">Description</label>
+        <input class="form-control" ng-model="payload.description" id="description" name="description" placeholder="this is a postcard">
+      </div>
+
+      <div class="form-group">
+        <label class="dashboard-control-label" for="front">Front URL<span class="required-asterisk">*</span></label>
+        <input class="form-control" ng-model="payload.front" id="front" name="front" placeholder="https://lob.com/postcardfront.pdf">
+      </div>
+
+      <div class="form-group">
+        <label class="dashboard-control-label" for="back">Back URL<span class="required-asterisk">*</span></label>
+        <input class="form-control" ng-model="payload.back" id="back" name="back" placeholder="https://lob.com/postcardback.pdf">
+      </div>
+
+      <div class="form-group">
+        <label class="dashboard-control-label">To Address<span class="required-asterisk">*</span></label>
+        <input class="form-control" ng-model="payload.to.name" name="to[name]" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <input class="form-control" ng-model="payload.to.address_line1" name="to[address_line1]" placeholder="Address Line 1">
+      </div>
+      <div class="form-group">
+        <input class="form-control" ng-model="payload.to.address_line2" name="to[address_line2]" placeholder="Address Line 2">
+      </div>
+      <div class="form-group">
+        <input class="form-control" ng-model="payload.to.address_city" name="to[address_city]" placeholder="City">
+      </div>
+      <div class="form-group">
+        <input class="form-control" ng-model="payload.to.address_state" name="to[address_state]" placeholder="State">
+      </div>
+      <div class="form-group">
+        <input class="form-control" ng-model="payload.to.address_zip" name="to[address_zip]" placeholder="ZIP">
+      </div>
+
+      <button class="btn btn-lg btn-blue" ng-disabled="loading">
+        <span ng-class="{ invisible: loading }">Send</span>
+        <span ng-if="loading" class="spinner"></span>
+      </button>
+    </form>
+  </div>
+
+  <div class="col-xs-12 col-sm-7">
+    <div ng-if="postcard">
+      <pre><code>{{postcard | json}}</code></pre>
+    </div>
+  </div>
+</div>
