@@ -2,7 +2,7 @@
 
 var Config = require('../../config')
 
-module.exports = function () {
+module.exports = function (API) {
 
   var Postcard = {};
 
