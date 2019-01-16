@@ -68,6 +68,11 @@
       "resolved": "https://registry.npmjs.org/angular-mocks/-/angular-mocks-1.5.6.tgz",
       "dev": true
     },
+    "angular-recaptcha": {
+      "version": "4.2.0",
+      "from": "angular-recaptcha@latest",
+      "resolved": "https://registry.npmjs.org/angular-recaptcha/-/angular-recaptcha-4.2.0.tgz"
+    },
     "angular-ui-router": {
       "version": "0.3.0",
       "from": "angular-ui-router@latest",

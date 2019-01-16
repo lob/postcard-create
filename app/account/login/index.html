@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-ms-6 col-ms-offset-3 col-md-4 col-md-offset-4">
-    <form class="form" ng-submit="login(user)">
+    <form class="form">
       <h1>Login</h1>
       <div class="col-xs-12">
         <div ng-class="{ 'in alert': error }" class="fade in alert-danger">
@@ -24,7 +24,7 @@
         <hr>
 
         <div class="form-group">
-          <button class="btn btn-blue-inverse pull-right" ng-disabled="loading">
+          <button vc-recaptcha class="btn btn-blue-inverse pull-right" ng-disabled="loading" on-create="setWidgetId(widgetId)" on-success="login(user)">
             <span ng-class="{ invisible : loading }">Sign In</span>
             <span ng-show="loading" class="spinner"></span>
           </button>

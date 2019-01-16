@@ -17,6 +17,7 @@ describe('login controller', function () {
   var $scope;
   var $state;
   var Auth;
+  var Recaptcha;
 
   beforeEach(Angular.mock.inject(function ($injector) {
     $controller = $injector.get('$controller');
@@ -25,7 +26,38 @@ describe('login controller', function () {
     $scope      = $injector.get('$rootScope').$new();
     $state      = $injector.get('$state');
     Auth        = $injector.get('Auth');
+    Recaptcha   = $injector.get('vcRecaptchaService');
   }));
+
+  describe('setWidgetId', function () {
+
+    it('sets widgetId', function () {
+      var widgetId = 'recaptcha1';
+
+      $controller('LoginCtrl', { $scope: $scope, $state: $state });
+
+      $scope.setWidgetId(widgetId);
+
+      expect($scope.widgetId).to.eql(widgetId);
+    });
+  });
+
+  describe('cbExpiration', function () {
+
+    it('reloads the recaptcha', function () {
+      var recaptchaMock = Sinon.mock(Recaptcha);
+
+      $controller('LoginCtrl', { $scope: $scope, $state: $state });
+
+      recaptchaMock.expects('reload').returns($q.resolve({}));
+
+      $scope.cbExpiration();
+      $scope.$apply();
+
+      recaptchaMock.verify();
+    });
+
+  });
 
   describe('login', function () {
 
@@ -33,6 +65,9 @@ describe('login controller', function () {
       $controller('LoginCtrl', { $scope: $scope, $state: $state });
 
       $scope.$apply();
+
+      Sinon.stub(Recaptcha, 'reload');
+      Sinon.stub(Recaptcha, 'getResponse').returns('token');
     });
 
     it('sets the token cookie', function () {

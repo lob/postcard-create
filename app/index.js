@@ -1,7 +1,8 @@
 'use strict';
 
-var Angular = require('angular');
-var Router  = require('angular-ui-router');
+var Angular   = require('angular');
+var Recaptcha = require('angular-recaptcha');
+var Router    = require('angular-ui-router');
 
 var Account  = require('./account');
 var Config   = require('./config');
@@ -14,6 +15,7 @@ require('./styles');
 module.exports = Angular.module('postcard-create', [
   Account,
   Home,
+  Recaptcha,
   Router,
   Services
 ])

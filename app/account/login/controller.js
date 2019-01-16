@@ -1,13 +1,23 @@
 'use strict';
 
-module.exports = function ($scope, $cookies, $state, Auth) {
+module.exports = function ($scope, $cookies, $state, Auth, vcRecaptchaService) {
 
   $scope.loading = false;
   $scope.error = null;
 
+  $scope.setWidgetId = function (widgetId) {
+    $scope.widgetId = widgetId;
+  }
+
+  $scope.cbExpiration = function () {
+    vcRecaptchaService.reload($scope.widgetId);
+  }
+
   $scope.login = function (user) {
     $scope.loading = true;
     $scope.error = null;
+
+    user.recaptcha_token = vcRecaptchaService.getResponse($scope.widgetId);
 
     Auth.login(user)
     .then(function (session) {
@@ -19,6 +29,7 @@ module.exports = function ($scope, $cookies, $state, Auth) {
       $scope.error = err.message;
     })
     .finally(function () {
+      $scope.cbExpiration();
       $scope.loading = false;
     });
   };
